@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/plugins/layouts_extents" >
+        <file>icon.png</file>
+    </qresource>
+</RCC>
