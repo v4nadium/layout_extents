@@ -33,7 +33,8 @@ def create_layout_extents_layer(layer_name='Layouts extents', color=QColor(255, 
     # Define attribute fields: layout name and map item name
     pr.addAttributes([
         QgsField('layout_name', QVariant.String),
-        QgsField('map_name', QVariant.String)
+        QgsField('map_name', QVariant.String),
+        QgsField('atlas_feature', QVariant.String)
     ])
     vl.updateFields()
 
@@ -45,14 +46,51 @@ def create_layout_extents_layer(layer_name='Layouts extents', color=QColor(255, 
     for layout in layout_manager.layouts():
         for item in layout.items():
             if isinstance(item, QgsLayoutItemMap):
-                # Get the visible extent polygon (with rotation applied)
-                qpolygonf = item.visibleExtentPolygon()  # type: QPolygonF
-                qgs_geom = QgsGeometry.fromQPolygonF(qpolygonf)
+                atlas = layout.atlas()
+                map_item = item  # ton QgsLayoutItemMap
+                if atlas.enabled():
+                    # # TODO
+                    # # FIXME
+                    # coverage_layer = atlas.coverageLayer()
+                    # for feature in coverage_layer.getFeatures():
+                    #     # Compute the page extent for this feature
+                    #     extent = atlas.pageExtentForFeature(feature, map_item)  # QgsRectangle
+                    #     # Convert to polygon
+                    #     qgs_geom = QgsGeometry.fromPolygonXY([[
+                    #         extent.topLeft(),
+                    #         extent.topRight(),
+                    #         extent.bottomRight(),
+                    #         extent.bottomLeft(),
+                    #         extent.topLeft()
+                    #     ]])
+                    #     feat = QgsFeature()
+                    #     feat.setGeometry(qgs_geom)
+                    #     feat.setAttributes([layout.name(), map_item.displayName(), feature.id()])
+                    #     pr.addFeature(feat)
 
+                    # temporary: as if no atlas
+                    qpolygonf = item.visibleExtentPolygon()
+                    qgs_geom = QgsGeometry.fromQPolygonF(qpolygonf)
+                    feat = QgsFeature()
+                    feat.setGeometry(qgs_geom)
+                    feat.setAttributes([layout.name(), item.displayName(), None])
+                    pr.addFeature(feat)
+
+
+                else:  # Pas d'atlas : extent standard
+                    qpolygonf = item.visibleExtentPolygon()
+                    qgs_geom = QgsGeometry.fromQPolygonF(qpolygonf)
+                    feat = QgsFeature()
+                    feat.setGeometry(qgs_geom)
+                    feat.setAttributes([layout.name(), item.displayName(), None])
+                    pr.addFeature(feat)
+
+
+
+                # CRS if different from the project's one
                 # Get the map item CRS and the project CRS
                 crs_map = item.crs()
                 crs_project = project.crs()
-
                 # Reproject the geometry if the map item's CRS differs from the project CRS
                 if crs_map != crs_project:
                     tr = QgsCoordinateTransform(crs_map, crs_project, project)
