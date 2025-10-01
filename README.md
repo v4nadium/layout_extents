@@ -61,7 +61,9 @@ A layer with extents show on the canvas.
 
 
 ## Notes
- 
+
+You can view the layouts extents natively on the canvas with *View → Decorations → Layout Extents…*.
+
 *Plugin made with [Plugin Builder 3](https://g-sherman.github.io/Qgis-Plugin-Builder/)*
 
 *Code made with the help of an LLM*
