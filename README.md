@@ -1,4 +1,4 @@
-# <img src="icon.png" height="20"/> Layouts' Extents
+# <img src="icon.png" alt="logo" height="20"/> Layouts' Extents
 
 Saves the extents of all the maps from all the layouts inside a temporary layer.
 
@@ -16,10 +16,10 @@ You need to have QGIS 3.6+ installed.
 ## Usage
 Once installed, two things are added to your QGIS user interface:
 
- * A button <img source="readme.d/button.png" height="20"/> in the *Plugins* section of the toolbar
+ * A button <img src="readme.d/button.png" alt="the added button in the toolbar" height="20"/> in the *Plugins* section of the toolbar
  * An element in the *Plugins* menu:
  
-<img source="readme.d/menu.png" height="300"/>
+<img src="readme.d/menu.png" alt="the added menu element" height="300"/>
 
 **Both create a new temporary layer with the layouts' extents.**
 
@@ -38,13 +38,13 @@ The layer has the following fields:
 
 A QGIS project with one or more layouts.
 
-<img source="readme.d/layouts.png" height="300"/>
+<img src="readme.d/layouts.png" alt="two layouts centered on different parts of the map" height="300"/>
 
 ### Results
 
 A layer with extents show on the canvas.
 
-<img source="readme.d/layer.png" height="300"/>
+<img src="readme.d/layer.png" alt="layer shows in the layer list" height="300"/>
 
 
 ## To do
