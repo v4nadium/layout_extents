@@ -5,6 +5,7 @@
 [general]
 name=Layouts Extents
 qgisMinimumVersion=3.6
+qgisMaximumVersion = 4.99
 description=Saves the extents of all the maps from all the layouts inside a temporary layer.
 version=0.1
 author=Baptiste PARIS
